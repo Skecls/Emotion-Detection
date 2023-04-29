@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'homescreen.dart';
 
 Color brown = Color(0xFFD2B48C);
 Color darkbrown = Color(0xFF8B4513);
@@ -16,10 +17,7 @@ class _MyLoginState extends State<MyLogin> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage('assets/login.png'), fit: BoxFit.cover),
-      ),
+      
       child: Scaffold(
         backgroundColor: lightgreen,
         body: Stack(
@@ -88,7 +86,9 @@ class _MyLoginState extends State<MyLogin> {
                                 backgroundColor: darkbrown,
                                 child: IconButton(
                                     color: Colors.white,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                                    },
                                     icon: Icon(
                                       Icons.arrow_forward,
                                     )),
