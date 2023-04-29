@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'NavBar.dart';
 import 'profile.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -25,11 +26,29 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(
         child: ListView(
           children: [
-            const DrawerHeader(
+            DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
+                image: DecorationImage(
+                  image: AssetImage("assets/images/profile-1.jpg"),
+                  fit: BoxFit.cover,
+                ),
               ),
-              child: Text('Profile Name'),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Text(
+                      'MeowMeow123',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             ListTile(
               title: Text('Home'),
@@ -70,27 +89,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     width: 100,
                     fit: BoxFit.fill,
                   )
-                : Image.file(
-                    File(selectedImagePath),
-                    height: 200,
-                    width: 200,
+                : Image.asset(
+                    'assets/images/Video.png',
+                    height: 100,
+                    width: 100,
                     fit: BoxFit.fill,
                   ),
-            Text(
-              'Select Image',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-            ),
             SizedBox(
-              height: 20.0,
+              height: 50.0,
             ),
             ElevatedButton(
                 style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.green),
                     padding: MaterialStateProperty.all(const EdgeInsets.only(
-                      left: 40,
-                      top: 20,
-                      bottom: 20,
-                      right: 40,
+                      left: 60,
+                      top: 15,
+                      bottom: 15,
+                      right: 60,
                     )),
                     textStyle: MaterialStateProperty.all(
                         const TextStyle(fontSize: 20, color: Colors.white))),
@@ -201,8 +216,24 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   selectImageFromGallery() async {
-    XFile? file = await ImagePicker()
-        .pickImage(source: ImageSource.gallery, imageQuality: 10);
+    XFile? file = await ImagePicker().pickVideo(source: ImageSource.gallery);
+    if (file != null) {
+      // Create a new multipart request
+      var request =
+          http.MultipartRequest('POST', Uri.parse('https://172.25.144.1/5000'));
+
+      // Add the video file to the request
+      request.files.add(
+          http.MultipartFile('video', file.openRead(), await file.length()));
+
+      // Send the request
+      var response = await request.send();
+
+      // Get the response body
+      var responseBody = await response.stream.bytesToString();
+      print(responseBody);
+    }
+    // if (file != null) final isImage = checkFileType(file.path);
     if (file != null) {
       return file.path;
     } else {
@@ -221,3 +252,20 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 }
+
+// final FlutterFFprobe = FlutterFFmpeg();
+
+
+// Future<bool> checkFileType(String filePath) async {
+//   if (filePath != '') {
+//     var probe = await FFprobe.execute(filePath);
+//     bool isVideo = probe.format_name.startsWith('video');
+//     bool isImage = probe.format_name.startsWith('image');
+//     if (isVideo) {
+//       return true;
+//     } else {
+//       return true;
+//     }
+//   } else
+//     return false;
+// }

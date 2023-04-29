@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/homescreen.dart';
+import 'package:test/loginpage.dart';
 import 'homescreen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,7 +24,7 @@ class _SplashState extends State<Splash> {
   _navigatetohome() async {
     await Future.delayed(Duration(milliseconds: 3000), () {});
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        context, MaterialPageRoute(builder: (context) => MyLogin()));
   }
 
   @override
