@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'profile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -18,11 +19,42 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.density_medium_outlined, color: Colors.black),
-          onPressed: () {
-            // add your onPressed action here
-          },
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Profile Name'),
+            ),
+            ListTile(
+              title: Text('Home'),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                ),
+              },
+            ),
+            ListTile(
+              title: Text('Profile'),
+              onTap: () => {
+                Navigator.pop(context),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => profile()),
+                ),
+              },
+            ),
+            ListTile(
+              title: Text('Sign out'),
+              onTap: () => {Navigator.pop(context)},
+            ),
+          ],
         ),
       ),
       backgroundColor: Colors.white,

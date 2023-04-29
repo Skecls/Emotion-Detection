@@ -7,7 +7,7 @@ import 'loginpage.dart';
 import 'register.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp( const MaterialApp(
     home: Splash(),
   ));
 }
