@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/homescreen.dart';
-import 'homescreen.dart';
+import 'loginpage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Color brown = Color(0xFFD2B48C);
@@ -21,9 +21,9 @@ class _SplashState extends State<Splash> {
   }
 
   _navigatetohome() async {
-    await Future.delayed(Duration(milliseconds: 3000), () {});
+    await Future.delayed(const Duration(milliseconds: 3000), () {});
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        context, MaterialPageRoute(builder: (context) => MyLogin()));
   }
 
   @override
@@ -41,16 +41,6 @@ class _SplashState extends State<Splash> {
           ),
         ),
       ),
-      // body: Container(
-      //   width: double.infinity,
-      //   height: double.infinity,
-      //   child: Expanded(
-      //     child: Image.asset(
-      //       'assets/images/splashscreen.jpg',
-      //       fit: BoxFit.cover,
-      //     ),
-      //   ),
-      // ),
     );
   }
 }

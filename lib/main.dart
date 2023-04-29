@@ -10,7 +10,7 @@ import 'profile.dart';
 import 'navbar.dart';
 
 void main() {
-  runApp(MaterialApp(
+  runApp(const MaterialApp(
     home: Splash(),
   ));
 }
