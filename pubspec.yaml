@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   path_provider: ^2.0.14
   image_picker: ^0.8.7+2
+  http: ^0.13.3
   
 dev_dependencies:
   flutter_test:
@@ -67,6 +68,8 @@ flutter:
       - assets/images/upload-image.jpg
       - assets/images/upload-image-1.png
       - assets/images/add-image.png
+      - assets/images/profile-1.jpg
+      - assets/images/Video.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
