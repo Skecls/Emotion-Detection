@@ -86,7 +86,13 @@ class _MyLoginState extends State<MyLogin> {
                                 backgroundColor: darkbrown,
                                 child: IconButton(
                                     color: Colors.white,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const HomeScreen()));
+                                    },
                                     icon: Icon(
                                       Icons.arrow_forward,
                                     )),

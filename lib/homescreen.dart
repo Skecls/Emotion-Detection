@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     fit: BoxFit.fill,
                   )
                 : Image.asset(
-                    'assets/images/Video.png',
+                    'assets/images/documnet.png',
                     height: 100,
                     width: 100,
                     fit: BoxFit.fill,
@@ -218,20 +218,24 @@ class _HomeScreenState extends State<HomeScreen> {
     XFile? file = await ImagePicker().pickVideo(source: ImageSource.gallery);
     if (file != null) {
       // Create a new multipart request
-      var request =
-          http.MultipartRequest('POST', Uri.parse('https://172.25.144.1/5000'));
+      var request = http.MultipartRequest('POST',
+          Uri.parse('https://e3cb-14-139-240-19.ngrok-free.app/endpoint'));
 
       // Add the video file to the request
-      request.files.add(
-          http.MultipartFile('video', file.openRead(), await file.length()));
+      request.files.add(await http.MultipartFile.fromPath('video', file.path));
 
       // Send the request
       var response = await request.send();
-
       // Get the response body
-      var responseBody = await response.stream.bytesToString();
-      print(responseBody);
+
+      //final file1 = File('video.mp4');
+      //await file1.writeAsBytes(bytes);
+      // VideoPlayerController controller = VideoPlayerController.file(file1);
+      // controller.initialize().then((_) {
+      // controller.play();
+      // });
     }
+
     // if (file != null) final isImage = checkFileType(file.path);
     if (file != null) {
       return file.path;
